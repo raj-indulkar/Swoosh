@@ -13,13 +13,13 @@ class LeagueVC: UIViewController {
     @IBOutlet weak var nextOutlet: ButtonBorder!
     
     // declaring player var
-    var player: Player!
+    var leaguePlayer: Player!
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
         // initializing player var
-        player = Player()
+        leaguePlayer = Player()
     }
     
     @IBAction func onNextTapped(_ sender: Any) {
@@ -27,7 +27,7 @@ class LeagueVC: UIViewController {
     }
     
     func setPlayer (selectedLeague: String) {
-        player.desiredLeague = selectedLeague
+        leaguePlayer.desiredLeague = selectedLeague
         nextOutlet.isEnabled = true
     }
     
@@ -43,5 +43,10 @@ class LeagueVC: UIViewController {
         setPlayer(selectedLeague: "coed")
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let skillVCvar = segue.destination as? SkillVC {
+            skillVCvar.skillPlayer = leaguePlayer
+        }
+    }
     
 }
